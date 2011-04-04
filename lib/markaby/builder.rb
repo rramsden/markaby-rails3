@@ -260,7 +260,7 @@ module Markaby
 
     def method_missing(*args, &block)
       transform_stream unless transformed_stream?
-      @str.__send__(*args, &block)
+      @str.__send__(*args, &block).to_s
     end
 
     def transform_stream
