@@ -1,4 +1,10 @@
-= Markaby (Markup as Ruby)
+Markaby for Rails 3.0
+=====================
+
+This is only a temporary repository until the changes for Rails 3.0 are merged into the official markaby repository.
+
+Markaby (Markup as Ruby)
+========================
 
 Markaby is a very short bit of code for writing HTML pages in pure Ruby.
 It is an alternative to ERb which weaves the two languages together.
