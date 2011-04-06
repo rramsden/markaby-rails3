@@ -120,3 +120,4 @@ class MarkabyTest < Test::Unit::TestCase
   end
 
 end
+

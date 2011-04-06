@@ -1,0 +1,17 @@
+link_to "Test URL", test_url
+
+form_tag "markaby" do
+  div {
+    label "Field 1"
+    text_field_tag "markaby[field1]"
+
+    label "Field 2"
+    text_field_tag "markaby[field2]"
+    
+    div.text {
+      text_area_tag :symbol
+    }
+
+    submit_tag "Awesome"
+  }
+end

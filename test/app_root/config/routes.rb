@@ -1,4 +1,6 @@
 AppRoot3::Application.routes.draw do
+
+  match 'test' => 'markaby#index', :as => :test
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

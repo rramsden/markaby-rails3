@@ -75,7 +75,7 @@ module Markaby
     def initialize(assigns = {}, helpers = nil, &block)
       @streams = [Stream.new]
       @assigns = assigns.dup
-      @helpers = helpers
+      @helpers = helpers 
       @used_ids = {}
 
       @@options.each do |k, v|
@@ -184,6 +184,9 @@ module Markaby
     # HTML tags.  See html_tag for that.
     def method_missing(sym, *args, &block)
       if @helpers.respond_to?(sym, true) && !self.class.ignored_helpers.include?(sym)
+
+        sanitize!(args)
+
         r = @helpers.send(sym, *args, &block)
         if @output_helpers && r.respond_to?(:to_str)
           fragment { @builder << r }
@@ -207,6 +210,14 @@ module Markaby
       else
         super
       end
+    end
+
+    # sadly there is no way to override === in our proxy object Markaby::Fragment
+    # this basically will break all case statements unless we sanitize arguments before we
+    # sending them off to a helper method in Rails.
+    # http://stackoverflow.com/questions/3528129/fooling-rubys-case-operator-with-proxy-objects
+    def sanitize!(args)
+      args.each_with_index {|x,y| args[y] = x.to_s if Fragment === x}
     end
 
     if RUBY_VERSION_19
@@ -251,6 +262,7 @@ module Markaby
   #
   # For a more practical explanation, check out the README.
   class Fragment < DynamicObject
+   
     def initialize(*args)
       @stream, @start, @length = args
       @transformed_stream = false
@@ -260,16 +272,15 @@ module Markaby
 
     def method_missing(*args, &block)
       transform_stream unless transformed_stream?
-      @str.__send__(*args, &block).to_s
+      @str.__send__(*args, &block)
     end
 
     def transform_stream
       @transformed_stream = true
-
       # We can't do @stream.slice!(@start, @length),
       # as it would invalidate the @starts and @lengths of other Fragment instances.
       @str = @stream[@start, @length].to_s
-      @str = @str.html_safe if @str.respond_to?(:html_safe) # Rails 3 shenanigans
+      @str = @str.html_safe if respond_to?(:html_safe)
       @stream[@start, @length] = [nil] * @length
     end
 

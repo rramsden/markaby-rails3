@@ -20,6 +20,9 @@ class MarkabyController < ApplicationController
   def multiple_forms
   end
 
+  def helper_methods
+  end
+
   def partial_rendering
     render :partial => 'monkeys', :locals => @@locals
   end

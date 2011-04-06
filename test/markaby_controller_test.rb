@@ -2,7 +2,7 @@ require File.expand_path(File.join('test', 'test_helper'))
 
 # The Markaby Rails tests themselves.
 class MarkabyControllerTest < ActionController::TestCase
-
+  
   def setup
     @controller = MarkabyController.new
     @request = ActionController::TestRequest.new
@@ -16,7 +16,7 @@ class MarkabyControllerTest < ActionController::TestCase
     assert_template 'markaby/index'
     assert_equal @expected_monkey_names, @response.body
   end
-
+  
   def test_partial_rendering
     Markaby::Builder.set :indent, 2
     process :partial_rendering
@@ -31,6 +31,13 @@ class MarkabyControllerTest < ActionController::TestCase
     assert_raise ActionView::TemplateError do
       process :partial_rendering_with_stringy_keys_in_local_assigns
     end
+  end
+
+  def test_helpers
+    process :helper_methods
+    assert_response :success
+    expected_html = File.read(File.join(File.dirname(__FILE__), 'helpers.html')).chomp
+    assert_equal expected_html, @response.body
   end
 
   def test_inline_helper_rendering
@@ -66,4 +73,5 @@ class MarkabyControllerTest < ActionController::TestCase
       assert_equal 5, error.line_number.to_i
     end
   end
+
 end
