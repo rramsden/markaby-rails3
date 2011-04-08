@@ -3,6 +3,11 @@ Markaby for Rails 3.0
 
 This is only a temporary repository until the changes for Rails 3.0 are merged into the official markaby repository.
 
+TODO
+----
+
+- Rending a partial within a partial escapes HTML (issue caused with html_safe in Rails 3.0)
+
 Markaby (Markup as Ruby)
 ========================
 
