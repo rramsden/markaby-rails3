@@ -11,7 +11,8 @@ It is an alternative to ERb which weaves the two languages together.
 Also a replacement for templating languages which use primitive languages
 that blend with HTML.
 
-== Using Markaby as a Rails plugin
+Using Markaby as a Rails plugin
+-------------------------------
 
 Write Rails templates in pure Ruby.  Example layout:
 
@@ -23,12 +24,12 @@ Write Rails templates in pure Ruby.  Example layout:
   
     body do
       p flash[:notice], :style => "color: green"
-  
       self << content_for_layout
     end
   end
 
-== Using Markaby as a Ruby class
+Using Markaby as a Ruby class
+-----------------------------
 
 Markaby is flaming easy to call from your Ruby classes.
 
@@ -53,7 +54,8 @@ a helper object.  You can also affix the block right on to the class.
 
 See Markaby::Builder for all of that.
 
-= A Note About <tt>instance_eval</tt>
+A Note About <tt>instance_eval</tt>
+-----------------------------------
 
 The Markaby::Builder class is different from the normal Builder class,
 since it uses <tt>instance_eval</tt> when running blocks.  This cleans
@@ -79,13 +81,14 @@ This doesn't affect Rails users, but when used in regular Ruby code, it can
 be a bit disorienting.  You are recommended to put your Markaby code in a
 module where it won't mix with anything.
 
-= The Six Steps of Markaby
+The Six Steps of Markaby
+------------------------
 
 If you dive right into Markaby, it'll probably make good sense, but you're
 likely to run into a few kinks.  Why not review these six steps and commit
 them memory so you can really *know* what you're doing?
 
-== 1. Element Classes
+# 1. Element Classes
 
 Element classes may be added by hooking methods onto container elements:
 
@@ -103,7 +106,7 @@ Which results in:
     <div class="entryContent">Okay, once again, the idea here is ...</div>
   </div>
 
-== 2. Element IDs
+# 2. Element IDs
 
 IDs may be added by the use of bang methods:
 
@@ -121,7 +124,7 @@ Which results in:
     </div>
   </div>
 
-== 3. Validate Your XHTML 1.0 Output 
+# 3. Validate Your XHTML 1.0 Output 
 
 If you'd like Markaby to help you assemble valid XHTML documents,
 you can use the <tt>xhtml_transitional</tt> or <tt>xhtml_strict</tt>
@@ -146,7 +149,7 @@ list of valid tags and attributes before printing anything.
 
 Markaby will also make sure you don't use the same element ID twice!
 
-== 4. Escape or No Escape?
+# 4. Escape or No Escape?
 
 Markaby uses a simple convention for escaping stuff: if a string
 is an argument, it gets escaped.  If the string is in a block, it
@@ -175,7 +178,7 @@ passed back will be ignored.
 The final div above won't appear in the output.  You can't mix
 tag modes like that, friend.
 
-== 5. Auto-stringification
+# 5. Auto-stringification
 
 If you end up using any of your Markaby "tags" as a string, the
 tag won't be output.  It'll be up to you to add the new string
@@ -201,7 +204,7 @@ And any other operation you might perform on a string.
     end.
     join( " | " )
 
-== 6. The <tt>tag!</tt> Method
+# 6. The <tt>tag!</tt> Method
 
 If you need to force a tag at any time, call <tt>tag!</tt> with the
 tag name followed by the possible arguments and block.  The CssProxy
@@ -213,7 +216,7 @@ won't work with this technique.
     end
   end
 
-= A Note About Rails Helpers
+# A Note About Rails Helpers
 
 When used in Rails templates, the Rails helper object is passed into 
 Markaby::Builder.  When you call helper methods inside Markaby, the output
@@ -252,7 +255,7 @@ a method and its value will be returned, nothing will be output.
     p product.title
   end
 
-= Credits
+# Credits
 
 Markaby is a work of immense hope by Tim Fletcher and why the lucky stiff.
 Thankyou for giving it a whirl.
