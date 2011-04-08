@@ -6,7 +6,7 @@ This is only a temporary repository until the changes for Rails 3.0 are merged i
 TODO
 ----
 
-- Rending a partial within a partial escapes HTML (issue caused with html_safe in Rails 3.0)
+- Partial inception is broken... That is try rendering a partial within a partial within a partial thrice! It escapes HTML (bug caused by html_safe)
 
 Markaby (Markup as Ruby)
 ========================
